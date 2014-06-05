@@ -66,7 +66,7 @@ typedef enum {
 	BNPageSizeCustom
 } BNPageSize;
 
-@interface BNHtmlPdfKit : NSObject
+@interface BNHtmlPdfKit : NSObject <UIWebViewDelegate>
 
 /**
 The paper size of the generated PDF.
@@ -335,6 +335,12 @@ Determine the preferred paper size for general printing. From Pierre Bernard.
 */
 + (BNPageSize)defaultPageSize;
 
+
+
+- (void)_savePdf;
+@property (nonatomic, copy) NSString *outputFile;
+@property (nonatomic, strong) UIWebView *webView;
+
 @end;
 
 
@@ -369,4 +375,15 @@ Sent when there was an error trying to generate the PDF.
 */
 - (void)htmlPdfKit:(BNHtmlPdfKit *)htmlPdfKit didFailWithError:(NSError *)error;
 
+
 @end;
+
+
+#pragma mark - BNHtmlPdfKitPageRenderer Interface
+
+@interface BNHtmlPdfKitPageRenderer : UIPrintPageRenderer
+
+@property (nonatomic, assign) CGFloat topAndBottomMarginSize;
+@property (nonatomic, assign) CGFloat leftAndRightMarginSize;
+
+@end

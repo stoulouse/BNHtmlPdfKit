@@ -11,14 +11,6 @@
 #define BNSizeMakeWithPPI(width, height) CGSizeMake(width * PPI, height * PPI)
 
 
-#pragma mark - BNHtmlPdfKitPageRenderer Interface
-
-@interface BNHtmlPdfKitPageRenderer : UIPrintPageRenderer
-
-@property (nonatomic, assign) CGFloat topAndBottomMarginSize;
-@property (nonatomic, assign) CGFloat leftAndRightMarginSize;
-
-@end
 
 
 #pragma mark - BNHtmlPdfKitPageRenderer Implementation
@@ -38,15 +30,12 @@
 
 #pragma mark - BNHtmlPdfKit Extension
 
-@interface BNHtmlPdfKit () <UIWebViewDelegate>
+@interface BNHtmlPdfKit ()
 
 - (CGSize)_sizeFromPageSize:(BNPageSize)pageSize;
 
 - (void)_timeout;
 - (void)_savePdf;
-
-@property (nonatomic, copy) NSString *outputFile;
-@property (nonatomic, strong) UIWebView *webView;
 
 @property (nonatomic, copy) void (^dataCompletionBlock)(NSData *pdfData);
 @property (nonatomic, copy) void (^fileCompletionBlock)(NSString *pdfFileName);
